@@ -1,4 +1,4 @@
-# DS Bot for Sherlock Project
+# DS Bot for [Sherlock project](https://github.com/sherlock-project/sherlock)
 
 This is a Discord bot for the Sherlock project that searches for a given username on various websites. The bot uses Discord's slash commands feature to take input from the user and return the search results.
 
