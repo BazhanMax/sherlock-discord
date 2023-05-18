@@ -1,0 +1,4 @@
+sherlock-master/*
+bot_config.ini
+__pycache__
+*.txt
