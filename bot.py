@@ -1,7 +1,7 @@
 import discord
 from discord import app_commands
 import sys
-import os 
+import os
 import configparser
 from threading import Thread
 import threading
@@ -9,7 +9,7 @@ import asyncio
 import queue
 
 # sys.path.append("./sherlock-discord/sherlock-master/sherlock")
-from sherlockClass  import *
+from sherlockClass import *
 
 
 config = configparser.ConfigParser()
@@ -40,11 +40,11 @@ class aclient(discord.Client):
 client = aclient()
 tree = app_commands.CommandTree(client)
 
+
 # queue.put(results_list)
-def Worker(obj,q):
+def Worker(obj, q):
     obj.Search()
     q.put(obj)
-    
 
 
 @tree.command(
@@ -52,28 +52,33 @@ def Worker(obj,q):
 )  # guild specific slash command
 async def slashcmd(interaction, username: str, timeout: int, nsfw: bool):
     tor = False
-    
-    sherlock = Sherlock(username,timeout,tor,nsfw)
-    
-    
-    
+
+    sherlock = Sherlock(username, timeout, tor, nsfw)
+
     channel = interaction.channel
     await interaction.response.send_message(f"searching {username}")
 
     q = queue.Queue()
-    Thread_for_search = Thread(
-        target=Worker, args=(sherlock,q)
-    )
+    Thread_for_search = Thread(target=Worker, args=(sherlock, q))
+    status = sherlock.getStatus()
     Thread_for_search.start()
 
     while Thread_for_search.is_alive():
-        await interaction.edit_original_response(content=f"searching {username} [{sherlock.getstatus}] /")
+        await interaction.edit_original_response(
+            content=f"searching {username} [{status}] /"
+        )
         await asyncio.sleep(0.2)
-        await interaction.edit_original_response(content=f"searching {username} [{sherlock.getstatus}] -")
+        await interaction.edit_original_response(
+            content=f"searching {username} [{status}] -"
+        )
         await asyncio.sleep(0.2)
-        await interaction.edit_original_response(content=f"searching {username} [{sherlock.getstatus}] \\")
+        await interaction.edit_original_response(
+            content=f"searching {username} [{status}] \\"
+        )
         await asyncio.sleep(0.2)
-        await interaction.edit_original_response(content=f"searching {username} [{sherlock.getstatus}] |")
+        await interaction.edit_original_response(
+            content=f"searching {username} [{status}] |"
+        )
         await asyncio.sleep(0.2)
 
     sherlock = q.get()

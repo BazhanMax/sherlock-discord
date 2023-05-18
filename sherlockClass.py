@@ -80,7 +80,7 @@ class Sherlock(BaseClass):
         self.results_list = results_list
         # return results_list
     
-    def getstatus(self):
+    def getStatus(self):
         return "жду Валеру"
     
     def getResultsList(self):
