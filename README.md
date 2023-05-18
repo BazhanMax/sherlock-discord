@@ -7,7 +7,7 @@ This is a Discord bot for the Sherlock project that searches for a given usernam
 To use the bot, follow the instructions below:
 
 1. Clone the Sherlock project repository: `git clone https://github.com/sherlock-project/sherlock.git`.
-2. Copy the `bot.py` and `bot_config.ini` files to `sherlock-master/sherlock` directory.
+2. Copy the `sherlock-master` to `sherlock-discord` directory.
 3. Fill in the necessary values in `bot_config.ini` file. your bot must have `applications.commands`, `bot` scopes and `send messages` permission. `guild-id` - server id.
 4. Install the dependencies: `pip install discord.py`.
 5. Run the bot using `python bot.py`.
