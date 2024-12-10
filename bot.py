@@ -14,7 +14,7 @@ from sherlockClass import *
 
 config = configparser.ConfigParser()
 patchToFile = os.path.dirname(os.path.abspath(__file__))
-config.read(f"{patchToFile}/bot_config.ini")
+config.read(f"{patchToFile}/botconfig.ini")
 
 guild_id = config.get("discord", "guild_id")
 token = config.get("discord", "token")

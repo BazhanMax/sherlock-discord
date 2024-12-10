@@ -1,8 +1,8 @@
 from engines import *
+from sherlock_project import sherlock
+# current_path = os.path.dirname(os.path.abspath(__file__))
+# sys.path.append(f"{current_path}/sherlock-master/sherlock")
 
-current_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(f"{current_path}/sherlock-master/sherlock")
-from sherlock import *
 
 
 class Sherlock(BaseClass):
@@ -18,7 +18,7 @@ class Sherlock(BaseClass):
         tor = self.tor
         nsfw = self.nsfw
 
-        query_notify = QueryNotifyPrint(
+        query_notify = sherlock.QueryNotifyPrint(
             result=None, verbose=False, print_all=False, browse=False
         )
         try:
@@ -27,7 +27,7 @@ class Sherlock(BaseClass):
                     os.path.join(os.path.dirname(__file__), "resources/data.json")
                 )
             else:
-                sites = SitesInformation(None)
+                sites = sherlock.SitesInformation(None)
         except Exception as error:
             print(f"ERROR:  {error}")
             sys.exit(1)
@@ -60,7 +60,7 @@ class Sherlock(BaseClass):
             if not site_data:
                 sys.exit(1)
 
-        results = sherlock(
+        results = sherlock.sherlock(
             username,
             site_data,
             query_notify,
@@ -74,7 +74,7 @@ class Sherlock(BaseClass):
         exists_counter = 0
         for website_name in results:
             dictionary = results[website_name]
-            if dictionary.get("status").status == QueryStatus.CLAIMED:
+            if dictionary.get("status").status == sherlock.QueryStatus.CLAIMED:
                 exists_counter += 1
                 results_list.append(str(dictionary["url_user"]))
         self.results_list = results_list
