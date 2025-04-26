@@ -50,6 +50,7 @@ def Worker(obj, q):
 @tree.command(
     name="sherlock", guild=discord.Object(id=guild_id), description="search username"
 )  # guild specific slash command
+@app_commands.describe(username="Username to search",timeout="Website response timeout in seconds. 1 for quick search, 20 for advanced. It should be more then 0.",nsfw="This specify whether or not to include nsfw websites in search")
 async def slashcmd(interaction, username: str, timeout: int, nsfw: bool):
     tor = False
 
@@ -93,5 +94,31 @@ async def slashcmd(interaction, username: str, timeout: int, nsfw: bool):
     for msg in msg_lists:
         await channel.send(str(msg))
 
+@tree.command(
+    name="help", 
+    guild=discord.Object(id=guild_id), 
+    description="Show help message"
+)
+async def helpcmd(interaction: discord.Interaction):
+    embed = discord.Embed(
+        title="Help for Sherlock discord bot",
+        description="Thois is a bot for username search that provides ability to use Sherlock project in discord",
+        color=0x00ff00
+    )
+    
+    embed.add_field(
+        name="Comands",
+        value="`/sherlock [username] [timeout] [nsfw]` - start search",
+        inline=False
+    )
+    
+    embed.add_field(
+        name="Documentation",
+        value="""[Full Sherlock discord bot documentation on GitHub](https://github.com/BazhanMax/sherlock-discord)
+        [Full Sherlock documentation on GitHub](https://github.com/sherlock-project/sherlock)""",
+        inline=False
+    )
+    
+    await interaction.response.send_message(embed=embed)
 
 client.run(token)

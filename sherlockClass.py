@@ -81,7 +81,7 @@ class Sherlock(BaseClass):
         # return results_list
     
     def getStatus(self):
-        return "жду Валеру"
+        return "Searching"
     
     def getResultsList(self):
         return self.results_list
